@@ -1,8 +1,9 @@
 // Online C# Editor for free
 // Write, Edit and Run your C# code using C# Online Compiler
-// V1.1
+// V1.2
 
 using System;
+using System.Collections.Generic;
 
 public class HelloWorld
 {
@@ -16,6 +17,9 @@ public class Deck
 {
     public Suit[] possibleSuits;
     public int[] possibleNumbers;
+    public List<Card> drawPile;
+    public List<Card> discardPile;
+    public List<Card> notInDeck;
     
     public Deck(Suit[] suits, int[] numbers)
     {
@@ -23,7 +27,7 @@ public class Deck
         {
             for (int n = 0; n < numbers.Length; n++)
             {
-                Console.WriteLine(s + " " + n);
+                drawPile.Add(new Card(suits[s], numbers[n]));
             }
         }
     }
