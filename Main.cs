@@ -1,6 +1,6 @@
 // Online C# Editor for free
 // Write, Edit and Run your C# code using C# Online Compiler
-// V1.2
+// V1.3
 
 using System;
 using System.Collections.Generic;
@@ -10,6 +10,41 @@ public class HelloWorld
     public static void Main(string[] args)
     {
         Console.WriteLine ("Hello Mono World");
+    }
+}
+
+static public class NinetyNineGame
+{
+    public Player[] players;
+    public Deck deck;
+    // public Score[] cardValues
+}
+
+public class Player 
+{
+    public List<Card> hand;
+    public int maxHandSize;
+    public string name;
+    public int tokens;
+    
+    public Player(int handSize)
+    {
+        maxHandSize = handSize;
+    }
+    
+    public void Discard(Deck deck, Card toDiscard)
+    {
+        hand.Remove(toDiscard);
+        deck.Discard(toDiscard);
+    }
+    
+    public void Draw(Deck deck)
+    {
+        if (hand.Count <= maxHandSize) 
+        {
+            Card drawn = deck.Draw();
+            hand.Add(drawn);
+        }
     }
 }
 
@@ -30,6 +65,20 @@ public class Deck
                 drawPile.Add(new Card(suits[s], numbers[n]));
             }
         }
+    }
+    
+    public Card Draw()
+    {
+        Card drawn = drawPile[0];
+        drawPile.RemoveAt(0);
+        notInDeck.Add(drawn);
+        return drawn;
+    }
+    
+    public void Discard(Card toDiscard)
+    {
+        notInDeck.Remove(toDiscard);
+        discardPile.Add(toDiscard);
     }
 }
 
